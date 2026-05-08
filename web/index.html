@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>URL 解析下载工具</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <main class="app">
+      <section class="card">
+        <h1>URL 解析下载工具</h1>
+        <p class="hint">粘贴一段包含公开链接的文本，服务端会解析最终地址并在可下载时提供下载入口。</p>
+        <p class="hint sub">支持抖音视频无水印下载：粘贴抖音分享链接即可。</p>
+        <textarea id="input" placeholder="在这里粘贴链接或整段文本，支持抖音分享链接"></textarea>
+        <div class="actions">
+          <button id="parseButton">解析</button>
+          <button id="downloadButton" disabled>下载</button>
+          <button id="refreshButton" type="button">刷新</button>
+        </div>
+        <div id="progressSection" class="progress hidden">
+          <div class="progressHeader">
+            <span>下载进度</span>
+            <span id="progressText">0%</span>
+          </div>
+          <progress id="progressBar" value="0" max="100"></progress>
+        </div>
+        <p id="status" class="status"></p>
+        <div id="videoInfo" class="video-info hidden">
+          <img id="videoCover" class="video-cover hidden" alt="封面" />
+          <div class="video-meta">
+            <div class="video-title" id="videoTitle"></div>
+            <div class="video-author" id="videoAuthor"></div>
+            <div class="video-duration" id="videoDuration"></div>
+          </div>
+        </div>
+        <dl id="result" class="result hidden">
+          <div><dt>提取链接</dt><dd id="rawUrl"></dd></div>
+          <div><dt>最终链接</dt><dd id="finalUrl"></dd></div>
+          <div><dt>内容类型</dt><dd id="contentType"></dd></div>
+          <div><dt>建议文件名</dt><dd id="fileName"></dd></div>
+          <div><dt>可下载</dt><dd id="downloadable"></dd></div>
+        </dl>
+      </section>
+    </main>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>

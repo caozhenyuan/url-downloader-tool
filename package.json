@@ -1,0 +1,26 @@
+{
+  "name": "url-downloader-tool",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server/index.js",
+    "bundle": "esbuild server/index.js --bundle --platform=node --format=cjs --outfile=dist/bundle.cjs --external:undici --log-level=error",
+    "build": "npm run bundle && node -e \"require('fs').cpSync('scripts/entry.cjs','dist/entry.cjs')\" && npx pkg dist/entry.cjs --targets node20-win-x64 --output dist/url-downloader.exe --public --no-bytecode && node -e \"require('fs').cpSync('web','dist/web',{recursive:true})\"",
+    "build:all": "npm run bundle && node -e \"require('fs').cpSync('scripts/entry.cjs','dist/entry.cjs')\" && npx pkg dist/entry.cjs --targets node20-win-x64,node20-macos-x64,node20-linux-x64 --out-path dist --public --no-bytecode && node -e \"require('fs').cpSync('web','dist/web',{recursive:true})\""
+  },
+  "pkg": {
+    "assets": [
+      "web/**/*"
+    ]
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "undici": "^6.21.0"
+  },
+  "devDependencies": {
+    "@yao-pkg/pkg": "^5.16.1",
+    "esbuild": "^0.25.3"
+  }
+}
